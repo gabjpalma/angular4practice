@@ -1,0 +1,58 @@
+<h1>Hello {{name}}</h1>
+<h3>Email: {{email}}</h3>
+<h3>Age: {{age}}</h3>
+<p>Address: {{address.country}}, {{address.city}}, {{address.zip}}</p>
+<br>
+<h2>Hobbies</h2>
+<button (click)='editToggle()'>Edit</button>
+<div *ngIf=isEdit> <!-- value of isEdit (not a conditional) -->
+  <h2>Edit User</h2>
+  <form>
+    <div>
+      <label>Name: </label>
+      <input type='text' [(ngModel)]="name" name="name"> <!-- dual binding-->
+    </div>
+    <div>
+      <label>Email: </label>
+      <input type='text' [(ngModel)]="email" name="email">
+    </div>
+    <div>
+      <label>Age: </label>
+      <input type='number' [(ngModel)]="age" name="age">
+    </div>
+    <div>
+      <label>Country: </label>
+      <input type='text' [(ngModel)]="address.country" name="country">
+    </div>
+    <div>
+      <label>City: </label>
+      <input type='text' [(ngModel)]="address.city" name="city">
+    </div>
+    <div>
+      <label>Zip: </label>
+      <input type='text' [(ngModel)]="address.zip" name="zip">
+    </div>
+  </form>
+</div>
+<p>---------------</p>
+
+<form (submit)=addHobby(hobbyTA.value)> <!-- activates on submit -->
+  <label>Hobby: </label>
+  <input type='text' name='hobbyText' #hobbyTA> <!-- #hobbyTA is used as identifier to get value -->
+  <input type="submit">
+</form>
+
+<button (click)="onClick()">Click Me!</button>
+<ul>
+    <li *ngFor = 'let hobby of hobbies; let i = index' > <!-- *ngFor cycles through array, i is for numbering -->
+      {{i+1}}: {{hobby}} <button (click)="delete(hobby)">X</button></li> <!-- is looped so is like separate tags -->
+</ul>
+
+<h2>Posts</h2>
+<div *ngFor="let p of posts">
+  <h4>{{p.title}}</h4>
+  <p>{{p.body}}</p>
+  <label>{{p.id}}</label>
+  <br>
+  <label>{{p.userId}}</label>
+</div>
